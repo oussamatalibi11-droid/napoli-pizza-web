@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Napoli Pizza – Casablanca</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#009246;
+  --red:#ce2b37;
+  --white:#ffffff;
+  --cream:#faf9f6;
+  --dark:#111;
+  --gray:#777;
+  --light:#f4f4f0;
+  --border:#e8e8e4;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;color:var(--dark);background:#fff;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;text-decoration:none;color:var(--dark)}
+.nav-logo span.g{color:var(--green)}.nav-logo span.r{color:var(--red)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;font-size:14px;font-weight:600;color:var(--gray);transition:color .2s}
+.nav-links a:hover{color:var(--green)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.cart-btn{position:relative;background:var(--green);color:#fff;border:none;border-radius:50px;padding:9px 20px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;gap:8px;transition:background .2s}
+.cart-btn:hover{background:#007a3a}
+.cart-count{background:var(--red);color:#fff;border-radius:50%;width:20px;height:20px;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;min-width:20px}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{width:24px;height:2px;background:var(--dark);border-radius:2px;display:block;transition:all .3s}
+
+/* ── HERO ── */
+.hero{margin-top:64px;position:relative;height:92vh;min-height:520px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1600&q=85&auto=format&fit=crop') center/cover no-repeat}
+.hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,.52)}
+.hero-content{position:relative;text-align:center;color:#fff;padding:0 1.5rem;max-width:700px}
+.hero-flag{display:flex;gap:10px;justify-content:center;margin-bottom:1.5rem}
+.hero-flag span{width:10px;height:10px;border-radius:50%}
+.hero-flag span:nth-child(1){background:var(--green)}
+.hero-flag span:nth-child(2){background:rgba(255,255,255,.7)}
+.hero-flag span:nth-child(3){background:var(--red)}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,8vw,88px);font-weight:700;line-height:.95;margin-bottom:.75rem}
+.hero-title .g{color:#4dff96}.hero-title .r{color:#ff6b75}
+.hero-sub{font-size:clamp(14px,2vw,17px);color:rgba(255,255,255,.8);letter-spacing:2px;text-transform:uppercase;margin-bottom:.5rem}
+.hero-tagline{font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.6);margin-bottom:2.5rem}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--green);color:#fff;border:none;border-radius:50px;padding:14px 36px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-primary:hover{background:#007a3a}
+.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5);border-radius:50px;padding:14px 36px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:12px;letter-spacing:2px;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:6px}
+.hero-scroll::after{content:'';width:1px;height:40px;background:rgba(255,255,255,.3);display:block}
+
+/* ── SECTION SHARED ── */
+section{padding:5rem 5%}
+.section-badge{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--green);font-weight:700;margin-bottom:.75rem}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:700;line-height:1;color:var(--dark);margin-bottom:.5rem}
+.section-sub{font-size:14px;color:var(--gray);margin-bottom:3rem}
+.flag-divider{display:flex;height:3px;width:60px;border-radius:2px;overflow:hidden;margin:.75rem 0 2rem}
+.flag-divider div{flex:1}
+.flag-divider div:nth-child(1){background:var(--green)}
+.flag-divider div:nth-child(2){background:#ccc}
+.flag-divider div:nth-child(3){background:var(--red)}
+
+/* ── PROMOS ── */
+.promos{background:var(--cream)}
+.promos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.promo-card{background:#fff;border-radius:16px;overflow:hidden;border:1.5px solid var(--border);transition:transform .2s,border-color .2s;cursor:default}
+.promo-card:hover{transform:translateY(-4px);border-color:var(--green)}
+.promo-img{width:100%;height:160px;object-fit:cover;display:block}
+.promo-body{padding:18px 20px}
+.promo-tag{display:inline-block;background:#e8f7ef;color:var(--green);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:.75rem}
+.promo-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--dark);margin-bottom:.35rem}
+.promo-desc{font-size:12.5px;color:var(--gray);margin-bottom:1rem;line-height:1.6}
+.promo-price-row{display:flex;align-items:center;justify-content:space-between}
+.promo-price{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--red)}
+.promo-old{font-size:13px;color:#bbb;text-decoration:line-through;margin-left:6px}
+.promo-save{background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px}
+.promo-add{background:var(--green);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:background .2s}
+.promo-add:hover{background:#007a3a}
+
+/* ── MENU ── */
+.menu-section{background:#fff}
+.cat-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2.5rem}
+.cat-tab{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;background:none;border:2px solid var(--border);border-radius:12px;padding:10px 14px;font-family:'Nunito',sans-serif;transition:all .2s;min-width:72px}
+.cat-tab img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.cat-tab span{font-size:11.5px;font-weight:700;color:var(--gray)}
+.cat-tab.active{border-color:var(--green);background:#e8f7ef}
+.cat-tab.active span{color:var(--green)}
+.cat-tab:hover:not(.active){border-color:var(--red);background:#fef0f0}
+.cat-tab:hover:not(.active) span{color:var(--red)}
+
+.cat-section{display:none}
+.cat-section.active{display:block}
+.items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.item-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;transition:all .2s;position:relative}
+.item-card:hover{border-color:var(--green);transform:translateY(-2px)}
+.item-card-img{width:100%;height:130px;object-fit:cover;display:block}
+.item-card-body{padding:14px}
+.item-card-name{font-weight:700;font-size:14px;color:var(--dark);margin-bottom:4px}
+.item-card-desc{font-size:11.5px;color:#aaa;line-height:1.5;margin-bottom:10px;min-height:32px}
+.item-card-footer{display:flex;align-items:center;justify-content:space-between}
+.item-price{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--red)}
+.item-price small{font-size:12px;color:#ccc;font-family:'Nunito',sans-serif;font-weight:400}
+.add-btn{background:var(--green);color:#fff;border:none;border-radius:8px;width:34px;height:34px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-weight:300;line-height:1}
+.add-btn:hover{background:#007a3a;transform:scale(1.1)}
+.badge-new{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px}
+
+/* ── CART DRAWER ── */
+.cart-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:2000;opacity:0;pointer-events:none;transition:opacity .3s}
+.cart-backdrop.open{opacity:1;pointer-events:all}
+.cart-drawer{position:fixed;top:0;right:-440px;width:min(440px,100vw);height:100vh;background:#fff;z-index:2001;display:flex;flex-direction:column;transition:right .35s cubic-bezier(.4,0,.2,1);box-shadow:-4px 0 30px rgba(0,0,0,.12)}
+.cart-drawer.open{right:0}
+.cart-header{padding:1.5rem 1.5rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.cart-header h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700}
+.cart-close{background:none;border:none;font-size:24px;cursor:pointer;color:var(--gray);line-height:1;padding:4px}
+.cart-items{flex:1;overflow-y:auto;padding:1rem 1.5rem}
+.cart-empty{text-align:center;padding:3rem 0;color:var(--gray)}
+.cart-empty svg{width:56px;height:56px;color:#ddd;margin-bottom:1rem}
+.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.cart-item-img{width:60px;height:60px;border-radius:8px;object-fit:cover;flex-shrink:0}
+.cart-item-info{flex:1}
+.cart-item-name{font-size:14px;font-weight:700;margin-bottom:2px}
+.cart-item-price{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--red);font-weight:700}
+.cart-item-qty{display:flex;align-items:center;gap:8px;margin-top:6px}
+.qty-btn{background:var(--light);border:none;border-radius:6px;width:28px;height:28px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;transition:background .15s}
+.qty-btn:hover{background:var(--border)}
+.qty-num{font-size:14px;font-weight:700;min-width:20px;text-align:center}
+.cart-remove{background:none;border:none;color:#ccc;cursor:pointer;font-size:18px;padding:4px;margin-left:auto;align-self:flex-start;line-height:1}
+.cart-remove:hover{color:var(--red)}
+.cart-footer{padding:1.25rem 1.5rem;border-top:1px solid var(--border);background:var(--cream)}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.cart-total-label{font-size:14px;color:var(--gray)}
+.cart-total-val{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--dark)}
+.checkout-btn{width:100%;background:var(--green);color:#fff;border:none;border-radius:12px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:background .2s}
+.checkout-btn:hover{background:#007a3a}
+.checkout-btn:disabled{background:#bbb;cursor:not-allowed}
+
+/* ── ORDER MODAL ── */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:3000;opacity:0;pointer-events:none;transition:opacity .3s;display:flex;align-items:center;justify-content:center;padding:1rem}
+.modal-backdrop.open{opacity:1;pointer-events:all}
+.modal{background:#fff;border-radius:20px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;transform:scale(.95);transition:transform .3s}
+.modal-backdrop.open .modal{transform:scale(1)}
+.modal-header{padding:1.75rem 2rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-header h2{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700}
+.modal-close{background:none;border:none;font-size:24px;cursor:pointer;color:var(--gray);line-height:1}
+.modal-body{padding:1.75rem 2rem}
+.form-group{margin-bottom:1.25rem}
+.form-group label{display:block;font-size:12.5px;font-weight:700;color:var(--gray);letter-spacing:.5px;text-transform:uppercase;margin-bottom:.5rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;font-size:14px;font-family:'Nunito',sans-serif;color:var(--dark);outline:none;transition:border-color .2s;background:#fff}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--green)}
+.form-group textarea{resize:vertical;min-height:80px}
+.order-summary{background:var(--cream);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.5rem}
+.order-summary h3{font-size:13px;font-weight:700;color:var(--gray);letter-spacing:.5px;text-transform:uppercase;margin-bottom:.75rem}
+.order-line{display:flex;justify-content:space-between;font-size:13.5px;padding:4px 0;border-bottom:1px solid var(--border)}
+.order-line:last-child{border:none;font-weight:700;padding-top:8px;font-size:15px}
+.order-line span:last-child{color:var(--red);font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700}
+.submit-btn{width:100%;background:var(--green);color:#fff;border:none;border-radius:12px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:background .2s}
+.submit-btn:hover{background:#007a3a}
+
+/* ── SUCCESS ── */
+.success-screen{text-align:center;padding:2.5rem 2rem}
+.success-icon{width:70px;height:70px;background:#e8f7ef;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:32px}
+.success-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--dark);margin-bottom:.5rem}
+.success-sub{font-size:14px;color:var(--gray);margin-bottom:.5rem}
+.success-order-num{font-size:13px;color:var(--green);font-weight:700}
+
+/* ── WHY US ── */
+.why-us{background:var(--cream)}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px}
+.why-card{text-align:center;padding:2rem 1.5rem;background:#fff;border-radius:16px;border:1.5px solid var(--border)}
+.why-icon{font-size:36px;margin-bottom:1rem}
+.why-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;margin-bottom:.5rem}
+.why-desc{font-size:13px;color:var(--gray);line-height:1.7}
+
+/* ── FOOTER ── */
+footer{background:#111;color:#fff;padding:3.5rem 5% 2rem}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;margin-bottom:.75rem}
+.footer-logo .g{color:#4dff96}.footer-logo .r{color:#ff6b75}
+.footer-desc{font-size:13px;color:#888;line-height:1.8}
+.footer-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#555;font-weight:700;margin-bottom:1.25rem}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-links a{text-decoration:none;font-size:13.5px;color:#888;transition:color .2s}
+.footer-links a:hover{color:var(--green)}
+.footer-contact p{font-size:13.5px;color:#888;margin-bottom:.6rem;line-height:1.5}
+.footer-contact strong{color:#ddd}
+.footer-bottom{border-top:1px solid #222;padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:gap}
+.footer-flag{display:flex;height:3px;width:50px;border-radius:1px;overflow:hidden}
+.footer-flag div:nth-child(1){flex:1;background:var(--green)}
+.footer-flag div:nth-child(2){flex:1;background:#555}
+.footer-flag div:nth-child(3){flex:1;background:var(--red)}
+.footer-copy{font-size:12px;color:#555}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:#111;color:#fff;padding:12px 24px;border-radius:50px;font-size:14px;font-weight:600;z-index:5000;transition:transform .3s;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast-dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:.75rem;text-align:center}
+  .hero-btns{flex-direction:column;align-items:center}
+  .items-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-logo"><span class="g">NAPOLI</span> <span class="r">Pizza</span></a>
+  <ul class="nav-links">
+    <li><a href="#promos">Promotions</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#why">Pourquoi nous</a></li>
+    <li><a href="#footer">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="cart-btn" onclick="openCart()">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Mon Panier
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-flag"><span></span><span></span><span></span></div>
+    <div class="hero-sub">Casablanca · Fatto con amore</div>
+    <h1 class="hero-title"><span class="g">NAPOLI</span><br/><span class="r">Pizza</span></h1>
+    <p class="hero-tagline">Pizzas artisanales · Burgers · Tacos · Pâtes · Desserts</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-primary">Commander Maintenant</a>
+      <a href="#promos" class="btn-outline">Voir les Promos</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Défiler</div>
+</section>
+
+<!-- ── PROMOS ── -->
+<section class="promos" id="promos">
+  <div class="section-badge">Offres Spéciales</div>
+  <h2 class="section-title">Promotions du Moment</h2>
+  <p class="section-sub">Des deals exclusifs rien que pour vous — durée limitée !</p>
+  <div class="flag-divider"><div></div><div></div><div></div></div>
+  <div class="promos-grid">
+    <div class="promo-card">
+      <img class="promo-img" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80&auto=format&fit=crop" alt="Promo Pizza"/>
+      <div class="promo-body">
+        <div class="promo-tag">🍕 Offre Pizza</div>
+        <div class="promo-name">Pizza + Jus Frais</div>
+        <div class="promo-desc">Une pizza Margarita ou Végétarienne accompagnée d'un jus d'orange frais pressé.</div>
+        <div class="promo-price-row">
+          <div><span class="promo-price">40 <small style="font-size:13px;color:#ccc;font-family:'Nunito',sans-serif">dh</small></span><span class="promo-old">45 dh</span></div>
+          <button class="promo-add" onclick="addPromo('Pizza + Jus Frais','https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=200&q=80',40)">Ajouter</button>
+        </div>
+      </div>
+    </div>
+    <div class="promo-card">
+      <img class="promo-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80&auto=format&fit=crop" alt="Promo Burger"/>
+      <div class="promo-body">
+        <div class="promo-tag">🍔 Offre Burger</div>
+        <div class="promo-name">Duo Burgers</div>
+        <div class="promo-desc">2 Burgers classiques pour partager — idéal pour un repas en duo rapide et savoureux.</div>
+        <div class="promo-price-row">
+          <div><span class="promo-price">38 <small style="font-size:13px;color:#ccc;font-family:'Nunito',sans-serif">dh</small></span><span class="promo-old">46 dh</span></div>
+          <button class="promo-add" onclick="addPromo('Duo Burgers','https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&q=80',38)">Ajouter</button>
+        </div>
+      </div>
+    </div>
+    <div class="promo-card">
+      <img class="promo-img" src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=600&q=80&auto=format&fit=crop" alt="Promo Tacos"/>
+      <div class="promo-body">
+        <div class="promo-tag">🌯 Menu Tacos</div>
+        <div class="promo-name">Tacos + Boisson</div>
+        <div class="promo-desc">Un tacos de votre choix (Poulet ou Viande Hachée) + une boisson incluse dans le menu.</div>
+        <div class="promo-price-row">
+          <div><span class="promo-price">36 <small style="font-size:13px;color:#ccc;font-family:'Nunito',sans-serif">dh</small></span><span class="promo-old">42 dh</span></div>
+          <button class="promo-add" onclick="addPromo('Menu Tacos + Boisson','https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=200&q=80',36)">Ajouter</button>
+        </div>
+      </div>
+    </div>
+    <div class="promo-card">
+      <img class="promo-img" src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600&q=80&auto=format&fit=crop" alt="Promo Dessert"/>
+      <div class="promo-body">
+        <div class="promo-tag">🍰 Offre Dessert</div>
+        <div class="promo-name">Pizza + Tiramisu</div>
+        <div class="promo-desc">Toute pizza + Tiramisu de votre choix (Oreo, Caramel, Chocolat ou Framboise).</div>
+        <div class="promo-price-row">
+          <div><span class="promo-price">55 <small style="font-size:13px;color:#ccc;font-family:'Nunito',sans-serif">dh</small></span><span class="promo-old">63 dh</span></div>
+          <button class="promo-add" onclick="addPromo('Pizza + Tiramisu','https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=200&q=80',55)">Ajouter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MENU ── -->
+<section class="menu-section" id="menu">
+  <div class="section-badge">Notre Carte</div>
+  <h2 class="section-title">Le Menu Complet</h2>
+  <p class="section-sub">Choisissez vos plats favoris et commandez en quelques clics</p>
+  <div class="flag-divider"><div></div><div></div><div></div></div>
+
+  <div class="cat-tabs">
+    <button class="cat-tab active" onclick="showCat('pizza',this)">
+      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=120&q=80&auto=format&fit=crop" alt="Pizza"/>
+      <span>Pizza</span>
+    </button>
+    <button class="cat-tab" onclick="showCat('burger',this)">
+      <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=120&q=80&auto=format&fit=crop" alt="Burger"/>
+      <span>Burger</span>
+    </button>
+    <button class="cat-tab" onclick="showCat('tacos',this)">
+      <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=120&q=80&auto=format&fit=crop" alt="Tacos"/>
+      <span>Tacos</span>
+    </button>
+    <button class="cat-tab" onclick="showCat('pates',this)">
+      <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=120&q=80&auto=format&fit=crop" alt="Pâtes"/>
+      <span>Pâtes</span>
+    </button>
+    <button class="cat-tab" onclick="showCat('pasticcio',this)">
+      <img src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=120&q=80&auto=format&fit=crop" alt="Pasticcio"/>
+      <span>Pasticcio</span>
+    </button>
+    <button class="cat-tab" onclick="showCat('plat',this)">
+      <img src="https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=120&q=80&auto=format&fit=crop" alt="Plat"/>
+      <span>Plat</span>
+    </button>
+    <button class="cat-tab" onclick="showCat('desserts',this)">
+      <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=120&q=80&auto=format&fit=crop" alt="Desserts"/>
+      <span>Desserts</span>
+    </button>
+    <button class="cat-tab" onclick="showCat('jus',this)">
+      <img src="https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=120&q=80&auto=format&fit=crop" alt="Jus"/>
+      <span>Jus</span>
+    </button>
+  </div>
+
+  <!-- Pizza -->
+  <div class="cat-section active" id="cat-pizza">
+    <div class="items-grid" id="pizza-grid"></div>
+  </div>
+  <!-- Burger -->
+  <div class="cat-section" id="cat-burger">
+    <div class="items-grid" id="burger-grid"></div>
+  </div>
+  <!-- Tacos -->
+  <div class="cat-section" id="cat-tacos">
+    <div class="items-grid" id="tacos-grid"></div>
+  </div>
+  <!-- Pates -->
+  <div class="cat-section" id="cat-pates">
+    <div class="items-grid" id="pates-grid"></div>
+  </div>
+  <!-- Pasticcio -->
+  <div class="cat-section" id="cat-pasticcio">
+    <div class="items-grid" id="pasticcio-grid"></div>
+  </div>
+  <!-- Plat -->
+  <div class="cat-section" id="cat-plat">
+    <div class="items-grid" id="plat-grid"></div>
+  </div>
+  <!-- Desserts -->
+  <div class="cat-section" id="cat-desserts">
+    <div class="items-grid" id="desserts-grid"></div>
+  </div>
+  <!-- Jus -->
+  <div class="cat-section" id="cat-jus">
+    <div class="items-grid" id="jus-grid"></div>
+  </div>
+</section>
+
+<!-- ── WHY US ── -->
+<section class="why-us" id="why">
+  <div class="section-badge">Nos Engagements</div>
+  <h2 class="section-title">Pourquoi Napoli ?</h2>
+  <div class="flag-divider"><div></div><div></div><div></div></div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🍕</div>
+      <div class="why-title">Recettes Authentiques</div>
+      <div class="why-desc">Nos recettes sont inspirées de la tradition napolitaine, préparées avec des ingrédients frais chaque jour.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🚴</div>
+      <div class="why-title">Livraison Rapide</div>
+      <div class="why-desc">Livraison à domicile en moins de 45 minutes sur Casablanca. Appelez le 0666 726 870.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⭐</div>
+      <div class="why-title">Qualité Garantie</div>
+      <div class="why-desc">Nous sélectionnons soigneusement chaque ingrédient pour vous offrir une expérience gustative unique.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💚</div>
+      <div class="why-title">Prix Accessibles</div>
+      <div class="why-desc">La qualité italienne à des prix honnêtes — parce que tout le monde mérite de bien manger.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer id="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo"><span class="g">NAPOLI</span> <span class="r">Pizza</span></div>
+      <p class="footer-desc">Une expérience culinaire italienne au cœur de Casablanca. Pizzas artisanales, burgers gourmands et bien plus.</p>
+    </div>
+    <div>
+      <div class="footer-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="#home">Accueil</a></li>
+        <li><a href="#promos">Promotions</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#why">À Propos</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <div class="footer-title">Contact</div>
+      <p><strong>Livraison :</strong><br/>0666 726 870</p>
+      <p><strong>Réclamation :</strong><br/>0666 066 296</p>
+      <p><strong>Horaires :</strong><br/>11h00 – 23h30</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-flag"><div></div><div></div><div></div></div>
+    <p class="footer-copy">© 2026 Napoli Pizza Casablanca — Fatto con amore 🇮🇹</p>
+  </div>
+</footer>
+
+<!-- ── CART DRAWER ── -->
+<div class="cart-backdrop" id="cartBackdrop" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h2>Mon Panier</h2>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <p>Votre panier est vide</p>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total à payer</span>
+      <span class="cart-total-val"><span id="cartTotal">0</span> dh</span>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn" onclick="openCheckout()" disabled>Passer la Commande</button>
+  </div>
+</div>
+
+<!-- ── ORDER MODAL ── -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" id="orderModal">
+    <div id="formView">
+      <div class="modal-header">
+        <h2>Finaliser la Commande</h2>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="order-summary" id="orderSummary"></div>
+        <div class="form-group">
+          <label>Nom complet *</label>
+          <input type="text" id="custName" placeholder="Ex: Ahmed Bennani" required/>
+        </div>
+        <div class="form-group">
+          <label>Téléphone *</label>
+          <input type="tel" id="custPhone" placeholder="0600 000 000" required/>
+        </div>
+        <div class="form-group">
+          <label>Type de commande *</label>
+          <select id="orderType" onchange="toggleAddress()">
+            <option value="livraison">Livraison à domicile</option>
+            <option value="emporter">À emporter</option>
+          </select>
+        </div>
+        <div class="form-group" id="addressGroup">
+          <label>Adresse de livraison *</label>
+          <input type="text" id="custAddress" placeholder="Rue, quartier, Casablanca"/>
+        </div>
+        <div class="form-group">
+          <label>Notes (optionnel)</label>
+          <textarea id="custNotes" placeholder="Ex: sans olive, sonnette 2ème étage..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="submitOrder()">Confirmer la Commande</button>
+      </div>
+    </div>
+    <div id="successView" style="display:none">
+      <div class="success-screen">
+        <div class="success-icon">✓</div>
+        <div class="success-title">Commande Confirmée !</div>
+        <p class="success-sub">Merci ! Votre commande a bien été enregistrée.<br/>Nous vous appellerons sous peu pour confirmer.</p>
+        <p class="success-order-num" id="orderNum"></p>
+        <br/>
+        <button class="submit-btn" onclick="closeModal()" style="width:auto;padding:12px 36px">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── TOAST ── -->
+<div class="toast" id="toast">
+  <div class="toast-dot"></div>
+  <span id="toastMsg">Ajouté au panier</span>
+</div>
+
+<script>
+const MENU = {
+  pizza:[
+    {name:'Margarita',desc:'Sauce Tomate, Fromage, Mozzarella',price:30,img:'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&q=80&auto=format&fit=crop'},
+    {name:'Végétarienne',desc:'Sauce Tomate, Champignons, Poivron, Mozzarella',price:35,img:'https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=400&q=80&auto=format&fit=crop'},
+    {name:'Thon',desc:'Sauce Tomate, Thon, Mozzarella, Oignon, Olive',price:40,img:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80&auto=format&fit=crop'},
+    {name:'Carbonara',desc:'Dinde Fumée, Crème Fraiche, Mozzarella',price:45,img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80&auto=format&fit=crop'},
+    {name:'Quatre Fromage',desc:'Crème Fraiche, Mozzarella, Cheddar, Parmesan, Fromage Rouge',price:45,img:'https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?w=400&q=80&auto=format&fit=crop'},
+    {name:'Pepperoni',desc:'Sauce Tomate, Mozzarella, Pepperoni, Olive Noire',price:45,img:'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400&q=80&auto=format&fit=crop'},
+    {name:'Viande Hachée',desc:'Sauce Tomate, Mozzarella, Olive Noire, Poivron, Champignons',price:45,img:'https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?w=400&q=80&auto=format&fit=crop'},
+    {name:'Poulet',desc:'Sauce Tomate, Mozzarella, Poulet, Olive Noire',price:45,img:'https://images.unsplash.com/photo-1548369937-47519962c11a?w=400&q=80&auto=format&fit=crop'},
+    {name:'Quatre Saisons',desc:'Fruits de Mer, Viande Hachée, Poulet, Thon',price:54,img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80&auto=format&fit=crop'},
+    {name:'Fruits de Mer',desc:'Sauce Tomate, Mozzarella, Crevette, Calmar, Olive Noire',price:54,img:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80&auto=format&fit=crop'},
+    {name:'Pizza Napoli',desc:'La spéciale de la maison — recette exclusive',price:59,img:'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&q=80&auto=format&fit=crop',badge:'Chef'},
+  ],
+  burger:[
+    {name:'Burger',desc:'Pain brioche, viande fraîche',price:20,img:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80&auto=format&fit=crop'},
+    {name:'Cheese Burger',desc:'Pain brioche, viande, cheddar fondu',price:23,img:'https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&q=80&auto=format&fit=crop'},
+    {name:'Egge Burger',desc:'Pain brioche, viande, oeuf',price:26,img:'https://images.unsplash.com/photo-1561758033-7e924f619b47?w=400&q=80&auto=format&fit=crop'},
+    {name:'Napoli Burger',desc:'La signature maison avec garniture spéciale',price:30,img:'https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&q=80&auto=format&fit=crop',badge:'Best'},
+  ],
+  tacos:[
+    {name:'Tacos Viande Hachée',desc:'Galette grillée, viande hachée, sauce',price:29,img:'https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=400&q=80&auto=format&fit=crop'},
+    {name:'Tacos Poulet',desc:'Galette grillée, poulet mariné, sauce',price:32,img:'https://images.unsplash.com/photo-1512152272829-e3139592d56f?w=400&q=80&auto=format&fit=crop'},
+    {name:'Tacos Mixtes',desc:'Viande hachée + poulet, sauce maison',price:35,img:'https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=400&q=80&auto=format&fit=crop'},
+    {name:'Tacos Crispy',desc:'Poulet croustillant, sauce épicée',price:35,img:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80&auto=format&fit=crop'},
+    {name:'Tacos Royal',desc:'Grande portion, double garniture',price:40,img:'https://images.unsplash.com/photo-1512152272829-e3139592d56f?w=400&q=80&auto=format&fit=crop'},
+    {name:'Tacos Double Royal',desc:'Le grand format — double tout',price:60,img:'https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=400&q=80&auto=format&fit=crop',badge:'XL'},
+  ],
+  pates:[
+    {name:'Bolognaise',desc:'Spaghetti ou Pennée, sauce viande hachée',price:40,img:'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&q=80&auto=format&fit=crop'},
+    {name:'Poulet Champignons',desc:'Spaghetti ou Pennée, poulet, champignons',price:40,img:'https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=400&q=80&auto=format&fit=crop'},
+    {name:'Carbonara',desc:'Spaghetti, dinde fumée, crème fraiche',price:45,img:'https://images.unsplash.com/photo-1612874742237-6526221588e3?w=400&q=80&auto=format&fit=crop'},
+    {name:'Fruits de Mer',desc:'Spaghetti ou Pennée, crevettes, calmar',price:55,img:'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400&q=80&auto=format&fit=crop'},
+  ],
+  pasticcio:[
+    {name:'Pasticcio Dinde Fumée',desc:'Gratin de pâtes à la dinde fumée',price:30,img:'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400&q=80&auto=format&fit=crop'},
+    {name:'Pasticcio Viande Hachée',desc:'Gratin de pâtes à la viande hachée',price:30,img:'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400&q=80&auto=format&fit=crop'},
+    {name:'Pasticcio Poulet',desc:'Gratin de pâtes au poulet',price:30,img:'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400&q=80&auto=format&fit=crop'},
+    {name:'Pasticcio Mixte',desc:'Gratin de pâtes mixte au four',price:35,img:'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400&q=80&auto=format&fit=crop'},
+    {name:'Pasticcio Fruits de Mer',desc:'Gratin de pâtes aux fruits de mer',price:45,img:'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400&q=80&auto=format&fit=crop'},
+  ],
+  plat:[
+    {name:'Chicken Napoli',desc:'Poulet pané, pâtes sauce champignon et frites',price:40,img:'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=400&q=80&auto=format&fit=crop',badge:'Signature'},
+  ],
+  desserts:[
+    {name:'Tiramisu Oreo',desc:'Crème mascarpone, biscuits Oreo',price:18,img:'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400&q=80&auto=format&fit=crop'},
+    {name:'Tiramisu Caramel',desc:'Crème mascarpone, sauce caramel',price:18,img:'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400&q=80&auto=format&fit=crop'},
+    {name:'Tiramisu Chocolat Milka',desc:'Crème mascarpone, chocolat Milka',price:18,img:'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400&q=80&auto=format&fit=crop'},
+    {name:'Tiramisu Framboise',desc:'Crème mascarpone, coulis framboise',price:18,img:'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400&q=80&auto=format&fit=crop'},
+  ],
+  jus:[
+    {name:'Jus Orange',desc:'Orange fraîche pressée',price:15,img:'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=400&q=80&auto=format&fit=crop'},
+    {name:'Jus Banane',desc:'Banane mixée, lait ou eau',price:18,img:'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=400&q=80&auto=format&fit=crop'},
+    {name:'Jus Fraise',desc:'Fraises fraîches mixées',price:20,img:'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=400&q=80&auto=format&fit=crop'},
+    {name:'Jus Mangue',desc:'Mangue fraîche mixée',price:25,img:'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=400&q=80&auto=format&fit=crop'},
+    {name:'Panaché',desc:'Mélange de fruits de saison',price:30,img:'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=400&q=80&auto=format&fit=crop'},
+  ],
+};
+
+let cart=[];
+
+function renderMenus(){
+  Object.entries(MENU).forEach(([cat,items])=>{
+    const g=document.getElementById(cat+'-grid');
+    if(!g)return;
+    g.innerHTML=items.map(item=>`
+      <div class="item-card">
+        ${item.badge?`<div class="badge-new">${item.badge}</div>`:''}
+        <img class="item-card-img" src="${item.img}" alt="${item.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80'"/>
+        <div class="item-card-body">
+          <div class="item-card-name">${item.name}</div>
+          <div class="item-card-desc">${item.desc}</div>
+          <div class="item-card-footer">
+            <div class="item-price">${item.price} <small>dh</small></div>
+            <button class="add-btn" onclick="addToCart('${item.name.replace(/'/g,"\\'")}','${item.img}',${item.price})" title="Ajouter au panier">+</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  });
+}
+
+function addToCart(name,img,price){
+  const ex=cart.find(i=>i.name===name);
+  if(ex){ex.qty++}else{cart.push({name,img,price,qty:1})}
+  updateCart();
+  showToast(name+' ajouté au panier');
+}
+
+function addPromo(name,img,price){
+  const ex=cart.find(i=>i.name===name);
+  if(ex){ex.qty++}else{cart.push({name,img,price,qty:1})}
+  updateCart();
+  showToast(name+' ajouté au panier');
+}
+
+function updateCart(){
+  const count=cart.reduce((a,i)=>a+i.qty,0);
+  const total=cart.reduce((a,i)=>a+i.price*i.qty,0);
+  document.getElementById('cartCount').textContent=count;
+  document.getElementById('cartTotal').textContent=total;
+  document.getElementById('checkoutBtn').disabled=cart.length===0;
+  renderCartItems();
+}
+
+function renderCartItems(){
+  const el=document.getElementById('cartItems');
+  if(cart.length===0){
+    el.innerHTML=`<div class="cart-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><p>Votre panier est vide</p></div>`;
+    return;
+  }
+  el.innerHTML=cart.map((item,idx)=>`
+    <div class="cart-item">
+      <img class="cart-item-img" src="${item.img}" alt="${item.name}" onerror="this.src='https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=200&q=80'"/>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">${item.price*item.qty} dh</div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="changeQty(${idx},-1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${idx},1)">+</button>
+        </div>
+      </div>
+      <button class="cart-remove" onclick="removeItem(${idx})">✕</button>
+    </div>
+  `).join('');
+}
+
+function changeQty(idx,delta){
+  cart[idx].qty+=delta;
+  if(cart[idx].qty<=0)cart.splice(idx,1);
+  updateCart();
+}
+
+function removeItem(idx){cart.splice(idx,1);updateCart()}
+
+function openCart(){document.getElementById('cartBackdrop').classList.add('open');document.getElementById('cartDrawer').classList.add('open')}
+function closeCart(){document.getElementById('cartBackdrop').classList.remove('open');document.getElementById('cartDrawer').classList.remove('open')}
+
+function openCheckout(){
+  closeCart();
+  const total=cart.reduce((a,i)=>a+i.price*i.qty,0);
+  const lines=cart.map(i=>`<div class="order-line"><span>${i.name} x${i.qty}</span><span>${i.price*i.qty} dh</span></div>`).join('');
+  document.getElementById('orderSummary').innerHTML=`<h3>Récapitulatif</h3>${lines}<div class="order-line"><span>Total</span><span>${total} dh</span></div>`;
+  document.getElementById('formView').style.display='';
+  document.getElementById('successView').style.display='none';
+  document.getElementById('modalBackdrop').classList.add('open');
+}
+
+function closeModal(){document.getElementById('modalBackdrop').classList.remove('open')}
+
+function toggleAddress(){
+  const t=document.getElementById('orderType').value;
+  document.getElementById('addressGroup').style.display=t==='livraison'?'':'none';
+}
+
+function submitOrder(){
+  const name=document.getElementById('custName').value.trim();
+  const phone=document.getElementById('custPhone').value.trim();
+  const type=document.getElementById('orderType').value;
+  const addr=document.getElementById('custAddress').value.trim();
+  if(!name||!phone){alert('Veuillez remplir votre nom et téléphone.');return}
+  if(type==='livraison'&&!addr){alert('Veuillez entrer votre adresse de livraison.');return}
+  const num='NP-'+Date.now().toString().slice(-6);
+  document.getElementById('orderNum').textContent='Numéro de commande : '+num;
+  document.getElementById('formView').style.display='none';
+  document.getElementById('successView').style.display='';
+  cart=[];updateCart();
+}
+
+function showCat(id,btn){
+  document.querySelectorAll('.cat-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('cat-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toastMsg').textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2400);
+}
+
+function toggleMenu(){}
+
+renderMenus();
+</script>
+</body>
+</html>
